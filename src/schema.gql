@@ -1,0 +1,22 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateThemeInput {
+  themeName: String!
+  themeTags: [String!]
+}
+
+type Mutation {
+  createTheme(createThemeInput: CreateThemeInput!): Theme!
+}
+
+type Query {
+  allThemes: [Theme!]!
+}
+
+type Theme {
+  id: Int!
+  themeName: String!
+  themeTags: [String!]
+}
