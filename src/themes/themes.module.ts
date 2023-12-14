@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ThemesService } from './themes.service';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ThemesResolver } from './themes.resolver';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Theme } from 'src/entities/themes.entity';
+import { ThemesService } from './themes.service';
+import { Theme, ThemeSchema } from 'src/schemas/theme.schema';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Theme])],
+  imports:[MongooseModule.forFeature([{name:'theme',schema:ThemeSchema}])],
   providers: [ThemesService, ThemesResolver]
 })
 export class ThemesModule {}

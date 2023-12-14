@@ -8,7 +8,7 @@ input CreateThemeInput {
 }
 
 type Mutation {
-  createTheme(createThemeInput: CreateThemeInput!): Theme!
+  createTheme(createThemeInput: CreateThemeInput!): Theme
 }
 
 type Query {
@@ -16,7 +16,7 @@ type Query {
 }
 
 type Theme {
-  id: Int!
+  _id: String!
   themeName: String!
   themeTags: [String!]
 }

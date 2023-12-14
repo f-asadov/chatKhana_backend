@@ -7,8 +7,8 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class Theme {
 
     @PrimaryGeneratedColumn()
-    @Field(type => Int)
-    id: number;
+    @Field(type => String)
+    _id: string;
 
     @Column()
     @Field()

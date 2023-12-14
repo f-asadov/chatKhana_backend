@@ -1,22 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectModel } from '@nestjs/mongoose';
+import { log } from 'console';
+import { Model } from 'mongoose';
 import { CreateThemeInput } from 'src/dto/create-theme.input';
-import { Theme } from 'src/entities/themes.entity';
-import { Repository } from 'typeorm/repository/Repository';
+import { Theme } from 'src/schemas/theme.schema';
 
 
 @Injectable()
 export class ThemesService {
 
-    constructor(@InjectRepository(Theme) private themeRepository:Repository<Theme>) {}
+    constructor(@InjectModel('theme') private readonly themeModel: Model<Theme>) { }
 
     async findAll() {
-         return this.themeRepository.find()
+        return await this.themeModel.find()
     }
 
-    async createTheme(createThemeInput:CreateThemeInput){
-        const newTheme =  this.themeRepository.create(createThemeInput)
+    async createTheme(createThemeInput: CreateThemeInput) {
+        const newTheme = new this.themeModel({ themeName: createThemeInput.themeName, themeTags: createThemeInput.themeTags })
+        console.log(newTheme)
+        
+        try{
+            await newTheme.save()
+            return newTheme
+        }
+        catch(err){
+            console.log(2)
+            console.log(err)
+        }
+       
 
-        return this.themeRepository.save(newTheme)
+       
     }
 }

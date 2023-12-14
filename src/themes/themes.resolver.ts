@@ -9,14 +9,14 @@ export class ThemesResolver {
 
 
     @Query(returns => [Theme])
-    allThemes():Promise<Theme[]>{
+    allThemes(){
         return this.themesService.findAll()
     }
 
 
     @Mutation(returns => Theme)
-    createTheme(@Args('createThemeInput') createThemeInput:CreateThemeInput){
-        return this.themesService.createTheme(createThemeInput)
+   async createTheme(@Args('createThemeInput') createThemeInput:CreateThemeInput){
+        await this.themesService.createTheme(createThemeInput);
     }
 
 }
